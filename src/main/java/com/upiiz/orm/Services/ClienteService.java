@@ -30,7 +30,17 @@ public class ClienteService {
     }
 
     //Actualizar un cliente por id
+    public ClienteEntity updateCliente(ClienteEntity cliente){
+        if (clienteRepository.existsById(cliente.getId())){
+            return clienteRepository.save(cliente);
+        }
+        return null;
+    }
 
+    //Eliminar un cliente por id
+    public void deleteCliente(Long id){
+        clienteRepository.deleteById(id);
+    }
 
 
 }

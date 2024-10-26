@@ -6,19 +6,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 // Lombok para reducir el codigo
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-//mapear (ORM)
-// reducir codigo(lombok)
-// Validar(Bean Validation)
-@Data
 //Constructor con todos los atributos
 @AllArgsConstructor
 //Constructor vacio
 @NoArgsConstructor
 //Mapear esta clase a una tabla de la base de datos
+@Data
 @Entity
 //Clase ClienteEntity -> tabla cliente
 @Table(name = "cliente")
@@ -53,11 +48,19 @@ public class ClienteEntity {
     @NotBlank(message = "La direccion es requerida")
     private String direccion;
 
-    @NotBlank(message = "La edad es requerida")
+    @NotNull(message = "La edad es requerida")
     @Min(value = 18, message = "La edad minima es 18")
     private int edad;
 
     @NotBlank(message = "El rfc es requerido")
     @Pattern(regexp = "^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$", message = "El RFC no es valido")
     private String rfc;
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
